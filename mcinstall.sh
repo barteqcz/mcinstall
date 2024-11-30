@@ -43,7 +43,7 @@ echo -e "${bold}Finished ${green}${bold}successfully!${white}${normal}"
 
 echo ""
 while true; do
-    read -rp "A ${bold}restart${normal} might be required for the launcher to work. ${bold}Do you want to reboot now?${normal} [${bold}Y${normal}/n]" answer
+    read -rp "A ${bold}restart${normal} might be required for the launcher to work. ${bold}Do you want to reboot now?${normal} [${bold}Y${normal}/n] " answer
     if [[ "$answer" == "Y" || "$answer" == "y" || "$answer" == "" ]]; then
         reboot
     elif [[ "$answer" == "N" || "$answer" == "n" ]]; then
