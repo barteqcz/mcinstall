@@ -2,6 +2,7 @@
 
 white='\033[0m'
 green='\033[0;32m'
+red='\033[0;31m'
 bold=$(tput bold)
 normal=$(tput sgr0)
 
@@ -17,6 +18,7 @@ ${normal}"
 
 echo -e "${bold}Downloading Minecraft...${normal}"
 wget https://launcher.mojang.com/download/Minecraft.tar.gz > /dev/null 2>&1
+
 echo -e "${bold}Installing Minecraft...${normal}"
 tar -xvzf Minecraft.tar.gz > /dev/null 2>&1
 sudo rm -f /usr/local/bin/minecraft-launcher > /dev/null 2>&1
@@ -33,7 +35,20 @@ Terminal=false
 Type=Application
 Categories=Game;" | sudo tee /usr/share/applications/minecraft-launcher.desktop > /dev/null 2>&1
 sudo chmod 755 /usr/share/applications/minecraft-launcher.desktop > /dev/null 2>&1
+
 echo -e "${bold}Cleaning up...${normal}"
 rm -rf minecraft-launcher > /dev/null 2>&1
 rm -f Minecraft.tar.gz > /dev/null 2>&1
 echo -e "${bold}Finished ${green}${bold}successfully!${white}${normal}"
+
+echo ""
+while true; do
+    read -rp "A ${bold}restart${normal} might be required for the launcher to work. ${bold}Do you want to reboot now?${normal} [${bold}Y${normal}/n]" answer
+    if [[ "$answer" == "Y" || "$answer" == "y" || "$answer" == "" ]]; then
+        reboot
+    elif [[ "$answer" == "N" || "$answer" == "n" ]]; then
+        break
+    else
+        echo -e "${bold}${red}Incorrect option.${white}${normal}"
+    fi
+done
